@@ -5,28 +5,30 @@ Begin VB.Form frmPessoa
    ClientHeight    =   4215
    ClientLeft      =   60
    ClientTop       =   405
-   ClientWidth     =   6000
+   ClientWidth     =   9015
    LinkTopic       =   "Form1"
    ScaleHeight     =   4215
-   ScaleWidth      =   6000
+   ScaleWidth      =   9015
    StartUpPosition =   3  'Windows Default
+   Begin MSFlexGridLib.MSFlexGrid flexAgenda 
+      Height          =   2535
+      Left            =   240
+      TabIndex        =   7
+      Top             =   1320
+      Width           =   6135
+      _ExtentX        =   10821
+      _ExtentY        =   4471
+      _Version        =   393216
+      Cols            =   4
+      FixedCols       =   0
+   End
    Begin VB.CommandButton cmdBuscaNome 
       Caption         =   "Busca"
       Height          =   255
-      Left            =   5400
-      TabIndex        =   8
+      Left            =   5280
+      TabIndex        =   6
       Top             =   360
       Width           =   615
-   End
-   Begin MSFlexGridLib.MSFlexGrid flexTelefones 
-      Height          =   1575
-      Left            =   240
-      TabIndex        =   6
-      Top             =   2520
-      Width           =   5055
-      _ExtentX        =   8916
-      _ExtentY        =   2778
-      _Version        =   393216
    End
    Begin VB.CommandButton cmdSalvaTelefone 
       Caption         =   "+"
@@ -58,18 +60,6 @@ Begin VB.Form frmPessoa
       Top             =   360
       Width           =   4455
    End
-   Begin MSFlexGridLib.MSFlexGrid flexPessoas 
-      Height          =   1215
-      Left            =   240
-      TabIndex        =   7
-      Top             =   1320
-      Width           =   5055
-      _ExtentX        =   8916
-      _ExtentY        =   2143
-      _Version        =   393216
-      Cols            =   3
-      FixedCols       =   0
-   End
    Begin VB.Label Label2 
       Caption         =   "Telefone"
       Height          =   255
@@ -92,6 +82,18 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub cmdBuscaNome_Click()
+
+    Dim opessoa As New Pessoa
+    Dim p As ADODB.Recordset
+    flexAgenda.Rows = 1
+    Set p = opessoa.buscaComTelefone(txtNome.Text)
+    While p.EOF = False
+        flexAgenda.AddItem p!id_pessoa & vbTab & p!nome & vbTab & p!id_telefone & vbTab & p!numero
+        p.MoveNext
+    Wend
+End Sub
+
 Private Sub cmdSalvaPessoa_Click()
     Dim opessoa As New Pessoa
     Dim p As ADODB.Recordset
@@ -101,7 +103,10 @@ Private Sub cmdSalvaPessoa_Click()
     End If
     id = opessoa.novo(txtNome.Text)
     Set p = opessoa.buscaID(id, True)
-    flexPessoas.AddItem p!id & vbTab & p!nome
+    flexAgenda.AddItem p!id & vbTab & p!nome
 End Sub
 
 
+Private Sub Form_Load()
+    flexAgenda.Rows = 1
+End Sub

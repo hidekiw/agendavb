@@ -28,7 +28,7 @@ Public Function busca(numero As String) As ADODB.Recordset
     Dim consulta As String
     consulta = "SELECT * FROM telefone WHERE numero LIKE '%" & numero & "%'"
     Set rs = conn.Execute(consulta, , adCmdText)
-   Set busca = rs
+    Set busca = rs
 End Function
 Public Function apagaTelefone(id As Integer) As Boolean
     Dim consulta As String

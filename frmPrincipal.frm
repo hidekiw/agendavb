@@ -28,15 +28,15 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
-Dim opessoa As New Pessoa
-Dim otelefone As New Telefone
-frmPessoa.Show
-'Dim rsPessoas As New ADODB.Recordset
-'opessoa.novo "ALEX"
-'Set rsPessoas = opessoa.busca("W")
-'opessoa.apagaPessoaSoft 4
-'listaPessoas
-'otelefone.novo "77777777", 6
+    Dim opessoa As New Pessoa
+    Dim otelefone As New Telefone
+    frmPessoa.Show
+    'Dim rsPessoas As New ADODB.Recordset
+    'opessoa.novo "ALEX"
+    'Set rsPessoas = opessoa.busca("W")
+    'opessoa.apagaPessoaSoft 4
+    'listaPessoas
+    'otelefone.novo "77777777", 6
 
 End Sub
 Private Sub listaPessoas()

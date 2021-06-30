@@ -35,7 +35,14 @@ Public Function busca(nome As String) As ADODB.Recordset
     Dim consulta As String
     consulta = "SELECT * FROM pessoa WHERE nome LIKE '%" & nome & "%' AND deleted_at IS NULL"
     Set rs = conn.Execute(consulta, , adCmdText)
-   Set busca = rs
+    Set busca = rs
+End Function
+Public Function buscaComTelefone(nome As String) As ADODB.Recordset
+    Dim rs As ADODB.Recordset
+    Dim consulta As String
+    consulta = "select p.id as id_pessoa, t.id as id_telefone,* from pessoa p left join telefone t on (p.id=t.id_pessoa) WHERE p.nome LIKE '%" & nome & "%' AND p.deleted_at IS NULL"
+    Set rs = conn.Execute(consulta, , adCmdText)
+    Set buscaComTelefone = rs
 End Function
 Public Function buscaID(id As Integer, lixeira As Boolean) As ADODB.Recordset
     Dim rs As ADODB.Recordset
@@ -45,7 +52,7 @@ Public Function buscaID(id As Integer, lixeira As Boolean) As ADODB.Recordset
         consulta = consulta & " AND deleted_at IS NULL"
     End If
     Set rs = conn.Execute(consulta, , adCmdText)
-     Set buscaID = rs
+    Set buscaID = rs
 End Function
 Public Function apagaPessoa(id As Integer) As Boolean
     Dim consulta As String
@@ -62,5 +69,5 @@ Public Function lixeira() As ADODB.Recordset
     Dim consulta As String
     consulta = "SELECT * FROM pessoa WHERE deleted_at IS NULL"
     Set rs = conn.Execute(consulta, , adCmdText)
-   Set lixeira = rs
+    Set lixeira = rs
 End Function
