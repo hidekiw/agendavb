@@ -11,10 +11,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-Const db_file = "agenda.accdb"
 Dim conn As ADODB.Connection
 Private Sub Class_Initialize()
-
     Set conn = New ADODB.Connection
     conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=" & App.Path & "\" & db_file
     conn.Open
@@ -40,7 +38,7 @@ End Function
 Public Function buscaComTelefone(nome As String) As ADODB.Recordset
     Dim rs As ADODB.Recordset
     Dim consulta As String
-    consulta = "select p.id as id_pessoa, t.id as id_telefone,* from pessoa p left join telefone t on (p.id=t.id_pessoa) WHERE p.nome LIKE '%" & nome & "%' AND p.deleted_at IS NULL"
+    consulta = "select p.id as id_pessoa, t.id as id_telefone,* from pessoa p left join telefone t on (p.id=t.id_pessoa) WHERE p.nome LIKE '%" & nome & "%' AND p.deleted_at IS NULL AND t.deleted_at IS NULL"
     Set rs = conn.Execute(consulta, , adCmdText)
     Set buscaComTelefone = rs
 End Function
@@ -56,7 +54,7 @@ Public Function buscaID(id As Integer, lixeira As Boolean) As ADODB.Recordset
 End Function
 Public Function apagaPessoa(id As Integer) As Boolean
     Dim consulta As String
-    consulta = "DELETE FROM pessoa WHERE id=" & id
+    consulta = "UPDATE pessoa SET deleted_at=NOW WHERE deleted_at IS NULL AND id=" & id
     conn.Execute consulta
 End Function
 Public Function apagaPessoaSoft(id As Integer) As Boolean

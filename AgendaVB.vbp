@@ -6,6 +6,7 @@ Class=Pessoa; Pessoa.cls
 Class=Telefone; Telefone.cls
 Object={CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0; MSDATGRD.OCX
 Object={5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0; MSFLXGRD.OCX
+Module=Config; Config.bas
 Startup="frmPrincipal"
 HelpFile=""
 Title="AgendaVB"

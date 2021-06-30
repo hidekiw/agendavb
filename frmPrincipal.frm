@@ -17,42 +17,41 @@ Begin VB.Form frmPrincipal
       TabIndex        =   0
       Top             =   120
       Width           =   8775
-      Begin VB.CommandButton Command3 
-         Caption         =   "TELEFONE"
+      Begin VB.CommandButton cmdSalvaTelefone 
+         Caption         =   "Salva"
          Height          =   255
-         Left            =   5880
+         Left            =   7320
          TabIndex        =   6
          Top             =   360
          Width           =   1215
       End
       Begin VB.CommandButton cmdBuscaNome 
-         Caption         =   "BUSCA"
+         Caption         =   "Busca"
          Height          =   255
-         Left            =   4800
+         Left            =   2880
          TabIndex        =   5
          Top             =   360
          Width           =   975
       End
       Begin VB.CommandButton cmdSalvaPessoa 
-         Caption         =   "ADD"
+         Caption         =   "Salva"
          Height          =   255
-         Left            =   3720
+         Left            =   1800
          TabIndex        =   4
          Top             =   360
          Width           =   975
       End
       Begin VB.TextBox txtTelefone 
          Height          =   285
-         Left            =   2160
+         Left            =   5880
          TabIndex        =   3
          Top             =   360
          Width           =   1335
       End
       Begin VB.TextBox txtNomePessoa 
          Height          =   285
-         Left            =   240
+         Left            =   120
          TabIndex        =   2
-         Text            =   "a"
          Top             =   360
          Width           =   1575
       End
@@ -61,8 +60,8 @@ Begin VB.Form frmPrincipal
          Left            =   120
          TabIndex        =   1
          Top             =   720
-         Width           =   8295
-         _ExtentX        =   14631
+         Width           =   8535
+         _ExtentX        =   15055
          _ExtentY        =   8493
          _Version        =   393216
          Cols            =   4
@@ -89,17 +88,21 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Declare Sub Sleep Lib "kernel32.dll" (ByVal dwMilliseconds As Long)
 Private Sub cmdBuscaNome_Click()
+    busca txtNomePessoa.Text
+End Sub
+Private Sub busca(nome As String)
     Dim opessoa As New Pessoa
     Dim p As ADODB.Recordset
     flexAgenda.Rows = 1
-    Set p = opessoa.buscaComTelefone(txtNomePessoa.Text)
+    Sleep 500
+    Set p = opessoa.buscaComTelefone(nome)
     While p.EOF = False
         flexAgenda.AddItem p!id_pessoa & vbTab & p!nome & vbTab & p!id_telefone & vbTab & p!numero
         p.MoveNext
     Wend
 End Sub
-
 Private Sub cmdSalvaPessoa_Click()
     Dim opessoa As New Pessoa
     Dim p As ADODB.Recordset
@@ -111,32 +114,33 @@ Private Sub cmdSalvaPessoa_Click()
     Set p = opessoa.buscaID(id, True)
     flexAgenda.AddItem p!id & vbTab & p!nome
 End Sub
-
-
-
+Private Sub cmdSalvaTelefone_Click()
+    Dim t As New Telefone
+    t.novo txtTelefone, flexAgenda.TextMatrix(flexAgenda.Row, 0)
+    busca ""
+End Sub
 Private Sub Form_Load()
     flexAgenda.Rows = 1
-flexAgenda.SelectionMode = flexSelectionByRow
-'flexAgenda.FillStyle = flexFillSingle
-'flexAgenda.AllowBigSelection = False
-flexAgenda.MergeCells = flexMergeRestrictRows
+    flexAgenda.SelectionMode = flexSelectionByRow
+    flexAgenda.MergeCells = flexMergeRestrictRows
+    flexAgenda.ColWidth(0) = 500    'id pessoa
+    flexAgenda.ColWidth(1) = 3000    'nome
+    flexAgenda.ColWidth(2) = 10    'id telefone
+    flexAgenda.ColWidth(3) = 1000    ' telefone
+    flexAgenda.TextMatrix(0, 0) = "ID"
+    flexAgenda.TextMatrix(0, 1) = "Nome"
+    flexAgenda.TextMatrix(0, 3) = "Telefone"
+    busca ""
 End Sub
-Private Sub listaPessoas()
-'    Dim rspessoas As New ADODB.Recordset
-'    Dim opessoas As New Pessoa
-'    configFlexPessoas
-'    Set rspessoas = opessoas.busca("")
-'    While rspessoas.EOF = False
-'        flexPessoas.AddItem rspessoas!id & vbTab & rspessoas!nome
-'        rspessoas.MoveNext
-'    Wend
+
+Private Sub mnuApagarTelefone_Click()
+    Dim t As New Telefone
+    Dim id_telefone As Integer
+
+    If flexAgenda.TextMatrix(flexAgenda.Row, 2) = "" Then
+        Exit Sub
+    End If
+
+    t.apagaTelefone flexAgenda.TextMatrix(flexAgenda.Row, 2)
+    busca ""
 End Sub
-'Private Sub configFlexPessoas()
-'flexPessoas.Rows = 1
-'flexPessoas.TextMatrix(0, 0) = "ID"
-'flexPessoas.TextMatrix(0, 1) = "Nome"
-'flexPessoas.ColWidth(0) = 500
-'flexPessoas.ColWidth(1) = 6000
-'flexPessoas.SelectionMode = flexSelectionByRow
-'flexPessoas.AllowBigSelection = False
-'End Sub
