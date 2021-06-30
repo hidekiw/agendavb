@@ -8,4 +8,4 @@
 *.dca
 *.scc
 *.tmp
-agendavb.dll
+agendavb.exe
