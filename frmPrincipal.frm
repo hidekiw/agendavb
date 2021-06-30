@@ -67,8 +67,8 @@ Dim otelefone As New Telefone
 'opessoa.novo "ALEX"
 'Set rsPessoas = opessoa.busca("W")
 'opessoa.apagaPessoaSoft 4
-listaPessoas
-otelefone.novo "77777777", 6
+'listaPessoas
+'otelefone.novo "77777777", 6
 
 End Sub
 Private Sub listaPessoas()
