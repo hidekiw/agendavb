@@ -19,19 +19,33 @@ Private Sub Class_Initialize()
     conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=" & App.Path & "\" & db_file
     conn.Open
 End Sub
-Public Sub novo(nome As String)
+Public Function novo(nome As String) As Integer
     Dim rs As ADODB.Recordset
     Dim consulta As String
+    novo = -1
     consulta = "INSERT INTO pessoa(nome,created_at) VALUES('" & UCase(nome) & "','" & Now & "')"
     Set rs = conn.Execute(consulta, , adCmdText)
+    consulta = "SELECT id FROM pessoa WHERE nome='" & nome & "'"
+    Set rs = conn.Execute(consulta, , adCmdText)
+    novo = rs!id
 
-End Sub
+End Function
 Public Function busca(nome As String) As ADODB.Recordset
     Dim rs As ADODB.Recordset
     Dim consulta As String
     consulta = "SELECT * FROM pessoa WHERE nome LIKE '%" & nome & "%' AND deleted_at IS NULL"
     Set rs = conn.Execute(consulta, , adCmdText)
    Set busca = rs
+End Function
+Public Function buscaID(id As Integer, lixeira As Boolean) As ADODB.Recordset
+    Dim rs As ADODB.Recordset
+    Dim consulta As String
+    consulta = "SELECT * FROM pessoa WHERE id=" & id
+    If lixeira = False Then
+        consulta = consulta & " AND deleted_at IS NULL"
+    End If
+    Set rs = conn.Execute(consulta, , adCmdText)
+     Set buscaID = rs
 End Function
 Public Function apagaPessoa(id As Integer) As Boolean
     Dim consulta As String
