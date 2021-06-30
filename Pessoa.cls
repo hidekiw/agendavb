@@ -52,20 +52,23 @@ Public Function buscaID(id As Integer, lixeira As Boolean) As ADODB.Recordset
     Set rs = conn.Execute(consulta, , adCmdText)
     Set buscaID = rs
 End Function
-Public Function apagaPessoa(id As Integer) As Boolean
-    Dim consulta As String
-    consulta = "UPDATE pessoa SET deleted_at=NOW WHERE deleted_at IS NULL AND id=" & id
-    conn.Execute consulta
-End Function
 Public Function apagaPessoaSoft(id As Integer) As Boolean
     Dim consulta As String
-    consulta = "UPDATE pessoa SET deleted_at=now WHERE id = " & id
+    consulta = "UPDATE pessoa SET deleted_at=now WHERE deleted_at IS NULL AND id = " & id
     conn.Execute consulta
 End Function
 Public Function lixeira() As ADODB.Recordset
     Dim rs As ADODB.Recordset
     Dim consulta As String
-    consulta = "SELECT * FROM pessoa WHERE deleted_at IS NULL"
+    consulta = "select p.id as id_pessoa, t.id as id_telefone,* from pessoa p left join telefone t on (p.id=t.id_pessoa) WHERE p.nome LIKE '%" & nome & "%' "
     Set rs = conn.Execute(consulta, , adCmdText)
     Set lixeira = rs
 End Function
+Public Function existeNome(nome As String) As ADODB.Recordset
+    Dim rs As ADODB.Recordset
+    Dim consulta As String
+    consulta = "SELECT * FROM pessoa WHERE nome = '" & nome & "' AND deleted_at IS NULL"
+    Set rs = conn.Execute(consulta, , adCmdText)
+    Set existeNome = rs
+End Function
+

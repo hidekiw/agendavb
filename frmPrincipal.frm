@@ -20,26 +20,32 @@ Begin VB.Form frmPrincipal
       Width           =   8775
       Begin VB.CommandButton cmdSalvaTelefone 
          Caption         =   "Salva"
-         Height          =   375
-         Left            =   7320
+         Height          =   855
+         Left            =   6840
+         Picture         =   "frmPrincipal.frx":169B2
+         Style           =   1  'Graphical
          TabIndex        =   6
-         Top             =   720
+         Top             =   240
          Width           =   1335
       End
       Begin VB.CommandButton cmdBuscaNome 
          Caption         =   "Busca Nome"
-         Height          =   375
+         Height          =   855
          Left            =   2280
+         Picture         =   "frmPrincipal.frx":2ACE4
+         Style           =   1  'Graphical
          TabIndex        =   5
-         Top             =   720
+         Top             =   240
          Width           =   1335
       End
       Begin VB.CommandButton cmdNovaPessoa 
          Caption         =   "Nova Pessoa"
-         Height          =   375
+         Height          =   855
          Left            =   840
+         Picture         =   "frmPrincipal.frx":41696
+         Style           =   1  'Graphical
          TabIndex        =   4
-         Top             =   720
+         Top             =   240
          Width           =   1335
       End
       Begin VB.TextBox txtTelefone 
@@ -120,6 +126,17 @@ Private Sub busca(nome As String)
         p.MoveNext
     Wend
 End Sub
+Private Sub listaApagados()
+    Dim opessoa As New Pessoa
+    Dim p As ADODB.Recordset
+    flexAgenda.Rows = 1
+    Sleep 500
+    Set p = opessoa.lixeira
+    While p.EOF = False
+        flexAgenda.AddItem p!id_pessoa & vbTab & p!nome & vbTab & p!id_telefone & vbTab & p!numero
+        p.MoveNext
+    Wend
+End Sub
 Private Sub cmdNovaPessoa_Click()
     Dim opessoa As New Pessoa
     Dim p As ADODB.Recordset
@@ -130,6 +147,7 @@ Private Sub cmdNovaPessoa_Click()
     id = opessoa.novo(txtNomePessoa.Text)
     Set p = opessoa.buscaID(id, True)
     flexAgenda.AddItem p!id & vbTab & p!nome
+    flexAgenda.Row = flexAgenda.Rows - 1
 End Sub
 
 Private Sub cmdSalvaTelefone_Click()
@@ -165,6 +183,7 @@ Private Sub configGrid()
     flexAgenda.TextMatrix(0, 1) = "Nome"
     flexAgenda.TextMatrix(0, 2) = "ID"
     flexAgenda.TextMatrix(0, 3) = "Telefone"
+    flexAgenda.ScrollBars = flexScrollBarVertical
 End Sub
 
 Private Sub mnuApagarPessoa_Click()
