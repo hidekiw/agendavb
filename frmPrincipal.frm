@@ -2,18 +2,18 @@ VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form frmPrincipal 
    Caption         =   "AgendaVB"
-   ClientHeight    =   5925
+   ClientHeight    =   6975
    ClientLeft      =   165
    ClientTop       =   810
    ClientWidth     =   9015
    Icon            =   "frmPrincipal.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5925
+   ScaleHeight     =   6975
    ScaleWidth      =   9015
    StartUpPosition =   3  'Windows Default
    Begin VB.Frame Frame1 
       Caption         =   "Agenda"
-      Height          =   5655
+      Height          =   7215
       Left            =   120
       TabIndex        =   0
       Top             =   120
@@ -21,31 +21,31 @@ Begin VB.Form frmPrincipal
       Begin VB.CommandButton cmdSalvaTelefone 
          Caption         =   "Salva"
          Height          =   855
-         Left            =   6840
+         Left            =   7320
          Picture         =   "frmPrincipal.frx":169B2
          Style           =   1  'Graphical
          TabIndex        =   6
-         Top             =   240
+         Top             =   960
          Width           =   1335
       End
       Begin VB.CommandButton cmdBuscaNome 
          Caption         =   "Busca Nome"
          Height          =   855
-         Left            =   2280
+         Left            =   1800
          Picture         =   "frmPrincipal.frx":2ACE4
          Style           =   1  'Graphical
          TabIndex        =   5
-         Top             =   240
+         Top             =   960
          Width           =   1335
       End
       Begin VB.CommandButton cmdNovaPessoa 
          Caption         =   "Nova Pessoa"
          Height          =   855
-         Left            =   840
+         Left            =   240
          Picture         =   "frmPrincipal.frx":41696
          Style           =   1  'Graphical
          TabIndex        =   4
-         Top             =   240
+         Top             =   960
          Width           =   1335
       End
       Begin VB.TextBox txtTelefone 
@@ -66,7 +66,7 @@ Begin VB.Form frmPrincipal
          Height          =   4335
          Left            =   120
          TabIndex        =   1
-         Top             =   1200
+         Top             =   2520
          Width           =   8535
          _ExtentX        =   15055
          _ExtentY        =   7646
