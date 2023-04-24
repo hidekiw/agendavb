@@ -1,11 +1,11 @@
 Type=Exe
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Reference=*\G{2A75196C-D9EB-4129-B803-931327F72D5C}#2.8#0#..\..\..\..\Program Files (x86)\Common Files\System\ado\msado28.tlb#Microsoft ActiveX Data Objects 2.8 Library
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{2A75196C-D9EB-4129-B803-931327F72D5C}#2.8#0#C:\Program Files (x86)\Common Files\System\ado\msado28.tlb#Microsoft ActiveX Data Objects 2.8 Library
 Form=frmPrincipal.frm
 Class=Pessoa; Pessoa.cls
 Class=Telefone; Telefone.cls
-Object={CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0; MSDATGRD.OCX
-Object={5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0; MSFLXGRD.OCX
+Object={CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0; MSDatGrd.ocx
+Object={5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0; MSFlxGrd.ocx
 Module=Config; Config.bas
 IconForm="frmPrincipal"
 Startup="frmPrincipal"

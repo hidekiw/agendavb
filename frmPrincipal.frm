@@ -1,12 +1,11 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFlxGrd.ocx"
 Begin VB.Form frmPrincipal 
    Caption         =   "AgendaVB"
    ClientHeight    =   6975
    ClientLeft      =   165
    ClientTop       =   810
    ClientWidth     =   9015
-   Icon            =   "frmPrincipal.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6975
    ScaleWidth      =   9015
@@ -22,7 +21,6 @@ Begin VB.Form frmPrincipal
          Caption         =   "Salva"
          Height          =   855
          Left            =   7320
-         Picture         =   "frmPrincipal.frx":169B2
          Style           =   1  'Graphical
          TabIndex        =   6
          Top             =   960
@@ -32,7 +30,6 @@ Begin VB.Form frmPrincipal
          Caption         =   "Busca Nome"
          Height          =   855
          Left            =   1800
-         Picture         =   "frmPrincipal.frx":2ACE4
          Style           =   1  'Graphical
          TabIndex        =   5
          Top             =   960
@@ -42,7 +39,6 @@ Begin VB.Form frmPrincipal
          Caption         =   "Nova Pessoa"
          Height          =   855
          Left            =   240
-         Picture         =   "frmPrincipal.frx":41696
          Style           =   1  'Graphical
          TabIndex        =   4
          Top             =   960
