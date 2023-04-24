@@ -1,0 +1,10 @@
+.DS_Store
+.Trashes
+*.csi
+*.exp
+*.lib
+*.lvw
+*.dca
+*.scc
+*.tmp
+producaolab.exe
